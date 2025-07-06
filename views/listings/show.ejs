@@ -16,6 +16,26 @@
     </p>
   </div>
   </div>
+
+
+<% if (currUser) { %>
+    <% const isFav = currUser.favorites.some(fav => fav.equals(listing._id)); %>
+
+    <% if (isFav) { %>
+      <form action="/listings/<%= listing._id %>/unfavorite" method="POST" class="d-inline">
+        <button class="btn btn-warning">★ Remove Favorite</button>
+      </form>
+    <% } else { %>
+      <form action="/listings/<%= listing._id %>/favorite" method="POST" class="d-inline">
+        <button class="btn btn-outline-warning">☆ Add to Favorite</button>
+      </form>
+    <% } %>
+  <% } %>
+
+
+
+
+
   <br>
 <%if(currUser&&listing.owner._id.equals(currUser._id)){%>
   <div class="btns">
