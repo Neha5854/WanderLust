@@ -3,7 +3,7 @@ module.exports.index=async (req, res) => {
   // const allListings = await Listing.find({});
   
   const { q } = req.query;
-  let allListings;
+  let allListings=[];
 
   if (q) {
     allListings = await Listing.find({
@@ -16,6 +16,7 @@ module.exports.index=async (req, res) => {
 
     if (allListings.length === 0) {
       req.flash("error", "No listings found for your search.");
+    return res.redirect("/listings");
     }
   } else {
     allListings = await Listing.find({});
