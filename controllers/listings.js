@@ -1,33 +1,28 @@
 const Listing=require("../models/listing");
 module.exports.index=async (req, res) => {
   // const allListings = await Listing.find({});
-   const { q, category } = req.query;
-  let filter = {};
+  
+  const { q } = req.query;
+  let allListings;
 
   if (q) {
-    filter.$or = [
-      { title: new RegExp(q, 'i') },
-      { location: new RegExp(q, 'i') },
-      { country: new RegExp(q, 'i') }
-    ];
+    allListings = await Listing.find({
+      $or: [
+        { title: new RegExp(q, 'i') },
+        { location: new RegExp(q, 'i') },
+        { country: new RegExp(q, 'i') }
+      ]
+    });
+
+    if (allListings.length === 0) {
+      req.flash("error", "No listings found for your search.");
+    }
+  } else {
+    allListings = await Listing.find({});
   }
 
-  if (q) {
-  allListings = await Listing.find({
-    $or: [
-      { title: new RegExp(q, 'i') },
-      { location: new RegExp(q, 'i') },
-      { country: new RegExp(q, 'i') }
-    ]
-  });
+  
 
-  if (allListings.length === 0) {
-    req.flash("error", "No listings found for your search.");
-    
-  }
-} else {
-  allListings = await Listing.find({});
-}
 
   res.render("listings/index.ejs", { allListings });
 };
