@@ -18,21 +18,6 @@
   </div>
 
 
-<div class="card col-6 offset-3 show-card listing-card position-relative">
-  <img src="<%=listing.image.url%>" class="card-img-top show-img" alt="listing_image">
-
-  <% if (currUser) { %>
-    <% const isFav = currUser.favorites.some(fav => fav.equals(listing._id)); %>
-    <form action="/listings/<%= listing._id %>/<%= isFav ? 'unfavorite' : 'favorite' %>" method="POST" class="position-absolute" style="top: 15px; right: 15px;">
-      <button type="submit" class="btn btn-light shadow-sm rounded-circle" title="<%= isFav ? 'Remove from favorites' : 'Add to favorites' %>" style="font-size: 24px; border: none;">
-        <% if (isFav) { %>
-          ❤️
-        <% } else { %>
-          🤍
-        <% } %>
-      </button>
-    </form>
-  <% } %>
 
 
 

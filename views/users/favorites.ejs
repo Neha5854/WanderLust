@@ -1,9 +1,0 @@
-<% layout("layouts/boilerplate") %>
-
-<h2 class="text-center my-4">Your Favorite Listings</h2>
-
-<div class="row">
-  <% favorites.forEach(listing => { %>
-    <%- include("../listings/card", { listing }) %>
-  <% }) %>
-</div>
