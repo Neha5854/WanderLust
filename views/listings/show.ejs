@@ -19,18 +19,18 @@
 
 
 <% if (currUser) { %>
-    <% const isFav = currUser.favorites.some(fav => fav.equals(listing._id)); %>
+  <% const isFav = currUser.favorites.some(fav => fav.equals(listing._id)); %>
+  <form action="/listings/<%= listing._id %>/<%= isFav ? 'unfavorite' : 'favorite' %>" method="POST" style="display: inline;">
+    <button type="submit" class="heart-btn">
+      <% if (isFav) { %>
+        ❤️
+      <% } else { %>
+        🤍
+      <% } %>
+    </button>
+  </form>
+<% } %>
 
-    <% if (isFav) { %>
-      <form action="/listings/<%= listing._id %>/unfavorite" method="POST" class="d-inline">
-        <button class="btn btn-warning">★ Remove Favorite</button>
-      </form>
-    <% } else { %>
-      <form action="/listings/<%= listing._id %>/favorite" method="POST" class="d-inline">
-        <button class="btn btn-outline-warning">☆ Add to Favorite</button>
-      </form>
-    <% } %>
-  <% } %>
 
 
 
